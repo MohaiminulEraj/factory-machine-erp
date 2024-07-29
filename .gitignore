@@ -54,7 +54,7 @@ pids
 
 # Compiled package-lock.json
 package-lock.json
-yarn.lock
+yarn.*
 bun.lockb
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
