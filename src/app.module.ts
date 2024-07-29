@@ -1,12 +1,13 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeOrmAsyncConfig } from './config/typeorm.config';
 import { UsersModule } from './modules/users/users.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { MachineModule } from './modules/machine/machine.module';
 
 @Module({
   imports: [
@@ -17,6 +18,8 @@ import { AuthModule } from './modules/auth/auth.module';
         cache: true
     }),
     ThrottlerModule.forRootAsync({
+        imports: [ConfigModule],
+        inject: [ConfigService],
         useFactory: async () => ({
             throttlers: [
                 {
@@ -33,6 +36,7 @@ import { AuthModule } from './modules/auth/auth.module';
     }),
     UsersModule,
     AuthModule,
+    MachineModule,
   ],
   controllers: [AppController],
   providers: [AppService],
