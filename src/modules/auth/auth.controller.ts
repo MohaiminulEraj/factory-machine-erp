@@ -89,13 +89,13 @@ export class AuthController {
         }
     }
 
-    @Get(':id')
-    findOne(@Param('id') id: string) {
-        return this.authService.findOne(+id)
-    }
+    // @Get(':id')
+    // findOne(@Param('id') id: string) {
+    //     return this.authService.findOne(+id)
+    // }
 
-    @Delete(':id')
-    remove(@Param('id') id: string) {
-        return this.authService.remove(+id)
-    }
+    // @Delete(':id')
+    // remove(@Param('id') id: string) {
+    //     return this.authService.remove(+id)
+    // }
 }

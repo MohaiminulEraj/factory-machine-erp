@@ -13,7 +13,7 @@ export class User extends CustomBaseEntity {
     employeeId: string
 
     @Exclude()
-    @Column({ type: 'varchar', length: 255, nullable: false })
+    @Column({ type: 'varchar', length: 255, nullable: false, select: false })
     @IsString()
     password: string
 

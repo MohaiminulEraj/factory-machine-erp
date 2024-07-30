@@ -43,9 +43,9 @@ export class MachineService {
                 )
             }
             const machineData = new MachineData()
+            machineData.date = Date.now()
             machineData.machine = machine
             machineData.user = user
-            machineData.date = Date.now()
             machineData.q1 = createMachineDataDto.q1
             machineData.q2 = createMachineDataDto.q2
             machineData.q3 = createMachineDataDto.q3
@@ -82,11 +82,11 @@ export class MachineService {
         })
     }
 
-    update(id: number, updateMachineDto: UpdateMachineDto) {
-        return `This action updates a #${id} machine`
-    }
+    // update(id: number, updateMachineDto: UpdateMachineDto) {
+    //     return `This action updates a #${id} machine`
+    // }
 
-    remove(id: number) {
-        return `This action removes a #${id} machine`
-    }
+    // remove(id: number) {
+    //     return `This action removes a #${id} machine`
+    // }
 }

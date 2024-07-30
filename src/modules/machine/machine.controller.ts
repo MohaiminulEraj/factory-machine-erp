@@ -12,7 +12,6 @@ import {
 } from '@nestjs/common'
 import { MachineService } from './machine.service'
 import { CreateMachineDto } from './dto/create-machine.dto'
-import { UpdateMachineDto } from './dto/update-machine.dto'
 import {
     ApiBearerAuth,
     ApiOperation,
@@ -51,7 +50,7 @@ export class MachineController {
         }
     }
 
-    @Get('data')
+    @Post('fetch-data')
     @ApiOperation({
         summary: 'Machine Data Endpoint'
     })
@@ -103,14 +102,14 @@ export class MachineController {
 
     @Get()
     @ApiOperation({
-        summary: 'Machine Data Endpoint'
+        summary: 'Machine Endpoint'
     })
     @ApiResponse({
         description: 'Something went wrong',
         status: HttpStatus.BAD_REQUEST
     })
     @ApiResponse({
-        description: 'Machine Data Found!',
+        description: 'Data Found!',
         status: HttpStatus.OK
     })
     @ApiBearerAuth()
@@ -123,16 +122,16 @@ export class MachineController {
     //     return this.machineService.findOne(+id)
     // }
 
-    @Patch(':id')
-    update(
-        @Param('id') id: string,
-        @Body() updateMachineDto: UpdateMachineDto
-    ) {
-        return this.machineService.update(+id, updateMachineDto)
-    }
+    // @Patch(':id')
+    // update(
+    //     @Param('id') id: string,
+    //     @Body() updateMachineDto: UpdateMachineDto
+    // ) {
+    //     return this.machineService.update(+id, updateMachineDto)
+    // }
 
-    @Delete(':id')
-    remove(@Param('id') id: string) {
-        return this.machineService.remove(+id)
-    }
+    // @Delete(':id')
+    // remove(@Param('id') id: string) {
+    //     return this.machineService.remove(+id)
+    // }
 }
