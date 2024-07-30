@@ -9,11 +9,14 @@ export class MachineCreateSeed implements Seeder {
         const machineRepository = dataSource.getRepository(Machine)
 
         // FIRST TRUNCATE THE TABLE
-        await machineRepository.delete({})
+        // await machineRepository.delete({})
+        await dataSource.query(`SET FOREIGN_KEY_CHECKS = 0;`)
+        await dataSource.query(`TRUNCATE machine;`)
+        await dataSource.query(`SET FOREIGN_KEY_CHECKS = 1;`)
 
         const machine_type = ['maker', 'packer']
 
-        for (let i = 1; i <= 10; i++) {
+        for (let i = 1; i <= 100; i++) {
             const type =
                 machine_type[Math.floor(Math.random() * machine_type.length)]
             await dataSource.query(

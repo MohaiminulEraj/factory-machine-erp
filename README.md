@@ -45,6 +45,13 @@ $ yarn run start:dev
 $ yarn run start:prod
 ```
 
+## Create Demo Machine Data
+
+```bash
+# development
+$ npm run seed:run
+```
+
 ## Test
 
 ```bash

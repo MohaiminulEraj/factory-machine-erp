@@ -11,11 +11,14 @@ export class UserCreateSeed implements Seeder {
         const hashedPassword = await bcrypt.hash('123456', salt)
 
         // FIRST TRUNCATE THE TABLE
-        await userRepository.delete({})
+        // await userRepository.delete({})
+        await dataSource.query(`SET FOREIGN_KEY_CHECKS = 0;`)
+        await dataSource.query(`TRUNCATE user;`)
+        await dataSource.query(`SET FOREIGN_KEY_CHECKS = 1;`)
 
         for (let i = 1; i <= 10; i++) {
             await dataSource.query(
-                `INSERT INTO user (name, employeeId, password) VALUES ("user${i}", "emp_${i}", "${hashedPassword}")`
+                `INSERT INTO user (name, employeeId, password) VALUES ("user_${i}", "emp_${i}", "${hashedPassword}")`
             )
         }
 
