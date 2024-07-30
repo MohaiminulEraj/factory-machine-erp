@@ -76,7 +76,7 @@ export class MachineService {
         return await this.machineRepository.find()
     }
 
-    private async findOneByMachineId(id: number) {
+    async findOneByMachineId(id: number) {
         return await this.machineRepository.findOne({
             where: { id }
         })
