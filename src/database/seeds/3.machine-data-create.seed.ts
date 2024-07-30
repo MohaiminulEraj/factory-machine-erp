@@ -14,7 +14,6 @@ export class MachineDataCreateSeed implements Seeder {
         const machines = await machineRepository.find()
         const question_answers = [null, true, false]
         // // FIRST TRUNCATE THE TABLE
-        // await machineDataRepository.delete({})
         await dataSource.query(`SET FOREIGN_KEY_CHECKS = 0;`)
         await dataSource.query(`TRUNCATE machine_data;`)
         await dataSource.query(`SET FOREIGN_KEY_CHECKS = 1;`)

@@ -9,7 +9,6 @@ export class MachineCreateSeed implements Seeder {
         const machineRepository = dataSource.getRepository(Machine)
 
         // FIRST TRUNCATE THE TABLE
-        // await machineRepository.delete({})
         await dataSource.query(`SET FOREIGN_KEY_CHECKS = 0;`)
         await dataSource.query(`TRUNCATE machine;`)
         await dataSource.query(`SET FOREIGN_KEY_CHECKS = 1;`)
@@ -23,7 +22,5 @@ export class MachineCreateSeed implements Seeder {
                 `INSERT INTO machine (machineName, machineType) VALUES ("machine_${i}", "${type}")`
             )
         }
-
-        // await factory(User)().createMany(10)
     }
 }
