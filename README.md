@@ -48,7 +48,7 @@ $ yarn run start:prod
 ## Create Demo Machine Data
 
 ```bash
-# development
+# db seed
 $ npm run seed:run
 ```
 
