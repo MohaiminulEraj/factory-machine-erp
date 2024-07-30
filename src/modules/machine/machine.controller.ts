@@ -13,16 +13,20 @@ import {
 import { MachineService } from './machine.service'
 import { CreateMachineDto } from './dto/create-machine.dto'
 import { UpdateMachineDto } from './dto/update-machine.dto'
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
+import {
+    ApiBearerAuth,
+    ApiOperation,
+    ApiResponse,
+    ApiTags
+} from '@nestjs/swagger'
 import { CreateMachineDataDto } from './dto/create-machine-data.dto'
 import { ThrottlerGuard } from '@nestjs/throttler'
-import { AuthGuard } from '@nestjs/passport'
 import { JwtAuthGuard } from 'src/common/guards/jwt-auth.guard'
 import { FindMachineDataDto } from './dto/find-machine-data.dto'
 
-@UseGuards(ThrottlerGuard, JwtAuthGuard)
 @ApiTags('🔒 Machine API')
 @Controller('machine')
+@UseGuards(JwtAuthGuard, ThrottlerGuard)
 export class MachineController {
     constructor(private readonly machineService: MachineService) {}
 
@@ -38,10 +42,11 @@ export class MachineController {
         description: 'Machine created successfully',
         status: HttpStatus.OK
     })
+    @ApiBearerAuth()
     async createMachine(@Body() createMachineDto: CreateMachineDto) {
         return {
             statusCode: HttpStatus.OK,
-            message: 'Login done successfully',
+            message: 'Machine created successfully',
             result: await this.machineService.createMachine(createMachineDto)
         }
     }
@@ -58,11 +63,14 @@ export class MachineController {
         description: 'Data Found!',
         status: HttpStatus.OK
     })
+    @ApiBearerAuth()
     async findMachineData(@Body() findMachineDataDto: FindMachineDataDto) {
         return {
             statusCode: HttpStatus.OK,
             message: 'Data Found!',
-            result: await this.machineService.findMachineData(findMachineDataDto)
+            result: await this.machineService.findMachineData(
+                findMachineDataDto
+            )
         }
     }
 
@@ -78,6 +86,7 @@ export class MachineController {
         description: 'Machine Data created successfully',
         status: HttpStatus.OK
     })
+    @ApiBearerAuth()
     async createMachineData(
         @Request() req,
         @Body() createMachineDataDto: CreateMachineDataDto
@@ -90,11 +99,23 @@ export class MachineController {
                 createMachineDataDto
             )
         }
-    }    
+    }
 
     @Get()
-    findAll() {
-        return this.machineService.findAll()
+    @ApiOperation({
+        summary: 'Machine Data Endpoint'
+    })
+    @ApiResponse({
+        description: 'Something went wrong',
+        status: HttpStatus.BAD_REQUEST
+    })
+    @ApiResponse({
+        description: 'Machine Data Found!',
+        status: HttpStatus.OK
+    })
+    @ApiBearerAuth()
+    async findAll() {
+        return await this.machineService.findAll()
     }
 
     // @Get(':id')

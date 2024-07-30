@@ -37,7 +37,10 @@ export class MachineService {
                 createMachineDataDto.machineId
             )
             if (!machine) {
-                throw new HttpException('Machine not found', HttpStatus.NOT_FOUND)
+                throw new HttpException(
+                    'Machine not found',
+                    HttpStatus.NOT_FOUND
+                )
             }
             const machineData = new MachineData()
             machineData.machine = machine
@@ -69,8 +72,8 @@ export class MachineService {
         })
     }
 
-    findAll() {
-        return `This action returns all machine`
+    async findAll() {
+        return await this.machineRepository.find()
     }
 
     private async findOneByMachineId(id: number) {
